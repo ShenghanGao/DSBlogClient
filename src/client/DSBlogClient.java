@@ -1,10 +1,12 @@
 package client;
 
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.List;
 import java.util.Scanner;
 
 public class DSBlogClient {
@@ -91,6 +93,20 @@ public class DSBlogClient {
 			}
 			pw.println(req);
 			pw.flush();
+
+			if (req.compareTo("l") == 0) {
+				List<String> messages = null;
+				try {
+					ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
+					messages = (List<String>) ois.readObject();
+				} catch (IOException | ClassNotFoundException e) {
+					e.printStackTrace();
+				}
+				for (String message : messages) {
+					System.out.println(message);
+				}
+			}
+
 			try {
 				socket.close();
 			} catch (IOException e) {
