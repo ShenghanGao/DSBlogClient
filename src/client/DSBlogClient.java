@@ -17,10 +17,11 @@ public class DSBlogClient {
 	public static void main(String[] args) throws UnknownHostException {
 		if (args.length != 1) {
 			System.out.println("args[0] should be the IP address of the datacenter!");
-			return;
+			DSBlogClient.desAddress = InetAddress.getByName("127.0.0.1");
+			// return;
 		}
 
-		System.out.println(args[0]);
+		// System.out.println(args[0]);
 		DSBlogClient.desAddress = InetAddress.getByName(args[0]);
 		DSBlogClient client = new DSBlogClient();
 
@@ -44,16 +45,16 @@ public class DSBlogClient {
 				request.append("p ");
 				request.append(ss[1]);
 				req = request.toString();
-				System.out.println("post req: \n" + req);
+				// System.out.println("post req: \n" + req);
 			} else if (isLookup) {
 				req = "l";
-				System.out.println("lookup req: \n" + req);
+				// System.out.println("lookup req: \n" + req);
 			} else if (isSync) {
 				String[] ss = s.split("\\s+", 2);
 				request.append("s ");
 				request.append(ss[1]);
 				req = request.toString();
-				System.out.println("sync req: \n" + req);
+				// System.out.println("sync req: \n" + req);
 			} else {
 				System.out.println("Invalid request!");
 				continue;
