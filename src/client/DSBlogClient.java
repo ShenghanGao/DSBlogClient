@@ -34,7 +34,7 @@ public class DSBlogClient {
 			if (!isPost) {
 				isLookup = s.matches("((LOOKUP)|(lookup))");
 				if (!isLookup) {
-					isSync = s.matches("((SYNC)|(sync))\\s+\\S+");
+					isSync = s.matches("((SYNC)|(sync))\\s+\\d+");
 				}
 			}
 
